@@ -10,64 +10,51 @@ int main()
     return 0;
 }
 // Question 2
-#include "iostream"
-#include "cmath"
+#include <iostream>
+#include <cmath>
 using namespace std;
 
-int main()
-{
-    int x, val1, val2, count = 0;
-    cin >> x;
-
-    val1 = ceil(sqrt(x));
-    val2 = x;
-
-    for (int i = 2; i <= val1; i++)
-    {
-        if (val2 % i == 0)
-        {
-            count = 1;
+int main() {
+    int n;
+    cin >> n;
+    bool isPrime = true;
+    for (int i = 2; i <= sqrt(n); i++) {
+        if (n % i == 0) {
+            isPrime = false;
+            break;
         }
     }
-
-    if (count == 0 && val2 != 1 || val2 == 2 || val2 == 3)
-    {
-        cout << "YES";
-    }
-    else
-    {
-        cout << "NO";
-    }
+    cout << (isPrime ? "Prime" : "Not Prime") << endl;
     return 0;
 }
+
 // Question 3
-#include "iostream"
+#include <iostream>
 using namespace std;
 
-int main()
-{
-    int x;
-    cin >> x;
-
-    for (int i = 0; i <= x; i++)
-    {
-        if (i % 2 != 0)
-        {
-            cout << i << "\t";
-        }
+int main() {
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n; i += 2) {
+        cout << i << (i + 2 > n ? "" : " ");
     }
     return 0;
 }
+
 // Question 4
-#include "iostream"
+#include <iostream>
 using namespace std;
 
-int main()
-{
-    int x;
-    cin >> x;
-    cout << x * x << endl;
+int main() {
+    int n, sum = 0;
+    cin >> n;
+    for (int i = 1; i <= n; i += 2) {
+        sum += i;
+    }
+    cout << sum << endl;
+    return 0;
 }
+
 
 // Question 5
 #include "iostream"
@@ -84,16 +71,20 @@ int main()
     }
 }
 // Question 6
-#include "iostream"
-#include "cmath"
+#include <iostream>
 using namespace std;
 
-int main()
-{
-    int x;
-    cin >> x;
-    cout << floor(log10(x) + 1) << endl;
+int main() {
+    int n, count = 0;
+    cin >> n;
+    while (n > 0) {
+        count++;
+        n /= 10;
+    }
+    cout << count << endl;
+    return 0;
 }
+
 // Question 7
 #include "iostream"
 using namespace std;
@@ -112,28 +103,23 @@ int main()
     cout << rev << endl;
 }
 // Question 8
-#include "iostream"
+#include <iostream>
 using namespace std;
 
-int main()
-{
-    long long n, ans = -1, val;
+int main() {
+    int n, largest = 0;
     cin >> n;
-    while (n != 0)
-    {
-        val = n % 10;
-        if (ans == -1)
-        {
-            ans = val;
+    while (n > 0) {
+        int digit = n % 10;
+        if (digit > largest) {
+            largest = digit;
         }
-        else
-        {
-            ans = max(ans, val);
-        }
-        n = n / 10;
+        n /= 10;
     }
-    cout << ans << endl;
+    cout << largest << endl;
+    return 0;
 }
+
 // Question 9
 #include "iostream"
 using namespace std;
@@ -176,30 +162,61 @@ int main()
 }
 // Question 11
 #include <iostream>
-#include <cmath>
-#include <string>
 using namespace std;
 
-// Question 11: Function Overloading for Calculating Area
-void calculateArea(double radius) {
-    cout << "Circle Area: " << 3.14159 * radius * radius << endl;
-}
-void calculateArea(double length, double breadth) {
-    cout << "Rectangle Area: " << length * breadth << endl;
-}
-void calculateArea(double base, double height, int triangle) {
-    cout << "Triangle Area: " << 0.5 * base * height << endl;
+const double PI = 3.14159;
+
+double calculateArea(double radius) {
+    return PI * radius * radius;
 }
 
+double calculateArea(double length, double breadth) {
+    return length * breadth;
+}
+
+double calculateArea(double base, double height, int) {
+    return 0.5 * base * height;
+}
+
+int main() {
+    double radius, length, breadth, base, height;
+
+    cin >> radius >> length >> breadth >> base >> height;
+
+    cout << calculateArea(radius) << endl;
+    cout << calculateArea(length, breadth) << endl;
+    cout << calculateArea(base, height, 0) << endl;
+
+    return 0;
+}
 // Question 12
-void calculateSalary(int stipend) {
-    cout << "Intern Salary: " << stipend << endl;
+#include <iostream>
+using namespace std;
+
+int calculateSalary(int stipend) {
+    return stipend;
 }
-void calculateSalary(int baseSalary, int bonuses) {
-    cout << "Employee Salary: " << baseSalary + bonuses << endl;
+
+int calculateSalary(int baseSalary, int bonuses) {
+    return baseSalary + bonuses;
 }
-void calculateSalary(int baseSalary, int bonuses, int incentives) {
-    cout << "Manager Salary: " << baseSalary + bonuses + incentives << endl;
+
+int calculateSalary(int baseSalary, int bonuses, int incentives) {
+    return baseSalary + bonuses + incentives;
+}
+
+int main() {
+    int stipend, baseSalary1, bonuses1, baseSalary2, bonuses2, incentives;
+
+    cin >> stipend;
+    cin >> baseSalary1 >> bonuses1;
+    cin >> baseSalary2 >> bonuses2 >> incentives;
+
+    cout << "Intern Salary: " << calculateSalary(stipend) << endl;
+    cout << "Employee Salary: " << calculateSalary(baseSalary1, bonuses1) << endl;
+    cout << "Manager Salary: " << calculateSalary(baseSalary2, bonuses2, incentives) << endl;
+
+    return 0;
 }
 
 // Question 13
